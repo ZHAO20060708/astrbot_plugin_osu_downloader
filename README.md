@@ -5,7 +5,6 @@
 
 - 🔗 自动识别 `https://osu.ppy.sh/beatmapsets/数字` 链接
 - 📥 从以下镜像站下载（按顺序尝试）：
-  - osu.sayobot
   - osu.direct
   - catboy.best
 - 📦 自动发送 `.osz` 文件到群聊
@@ -20,7 +19,13 @@
 
 ## 使用方法
 
-在群里发送任何包含 `https://osu.ppy.sh/beatmapsets/数字` 的消息，机器人会自动下载并发送谱面文件。
+在群里发送 `/download <链接>` 或 `/dl <链接>`，机器人会自动下载并发送谱面文件。
+
+示例：
+```
+/download https://osu.ppy.sh/beatmapsets/2508618
+/dl https://osu.ppy.sh/beatmapsets/2508618#mania/5525561
+```
 
 ## 配置项
 
@@ -31,9 +36,14 @@
 ## 依赖
 
 - AstrBot 运行环境
-- 网络能访问镜像站（国内用户推荐使用代理或确保镜像站可达）
+- 网络能访问镜像站
 
 ## 致谢
 
-- 镜像站 [osu.sayobot](https://osu.sayobot.cn/) ，[osu.direct](https://osu.direct) 和 [catboy.best](https://catboy.best) 提供下载服务
+- 镜像站 [osu.direct](https://osu.direct) 和 [catboy.best](https://catboy.best) 提供下载服务
+
+## 贡献者
+
+- 原作者：[xianyuOvO](https://github.com/xianyuOvO0)
+- 修改：[ZHAO20060708](https://github.com/ZHAO20060708)
 
