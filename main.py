@@ -3,6 +3,7 @@ osu谱面下载器
 - 临时文件存放于 /AstrBot/data/plugin_data/astrbot_plugin_osu_downloader/cache/
 - 优先 sayobot，osu.direct，备用 catboy.best
 - 增加文件存在性验证
+- 使用 /download <URL> 或 /dl <URL> 触发下载
 """
 
 import re
@@ -15,6 +16,11 @@ from astrbot.api import star, logger
 from astrbot.api.event import AstrMessageEvent, filter
 from astrbot.core.message.message_event_result import MessageChain
 from astrbot.api.message_components import Plain, File
+
+DOWNLOAD_REQUEST_RE = re.compile(
+    r"^/(?P<cmd>download|dl)\s+https?://osu\.ppy\.sh/beatmapsets/(?P<set_id>\d+)",
+    re.IGNORECASE,
+)
 
 
 class OsuDownloader(star.Star):
@@ -99,13 +105,16 @@ class OsuDownloader(star.Star):
                     logger.error(f"下载异常 {download_url}: {e} (尝试 {attempt+1}/{retries+1})")
         return None
 
-    @filter.regex(r"https?://osu\.ppy\.sh/beatmapsets/(\d+)")
-    async def on_osu_link(self, event: AstrMessageEvent):
-        """识别 osu! 谱面链接并自动下载 .osz 文件"""
-        match = re.search(r"https?://osu\.ppy\.sh/beatmapsets/(\d+)", event.message_str)
-        if not match:
+    @filter.event_message_type(filter.EventMessageType.ALL)
+    async def on_download_command(self, event: AstrMessageEvent):
+        """统一处理 /download 与 /dl 指令，格式：/download <osu谱面链接> 或 /dl <osu谱面链接>"""
+
+        raw_text = str(getattr(getattr(event, "message_obj", None), "message_str", "") or "")
+        matched = DOWNLOAD_REQUEST_RE.match(raw_text)
+        if not matched:
             return
-        set_id = int(match.group(1))
+
+        set_id = int(matched.group("set_id"))
 
         await event.send(MessageChain([Plain(f"🎵 正在下载谱面 {set_id} 喵~")]))
 
