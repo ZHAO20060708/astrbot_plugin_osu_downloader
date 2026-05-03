@@ -1,7 +1,7 @@
 """
 osu谱面下载器
 - 临时文件存放于 /AstrBot/data/plugin_data/astrbot_plugin_osu_downloader/cache/
-- 优先 sayobot，osu.direct，备用 catboy.best
+- 优先 osu.direct，备用 catboy.best
 - 增加文件存在性验证
 - 使用 /download <URL> 或 /dl <URL> 触发下载
 """
@@ -37,7 +37,6 @@ class OsuDownloader(star.Star):
         os.makedirs(self.temp_dir, exist_ok=True)
 
         self.mirrors = [
-            "https://txy1.sayobot.cn/beatmaps/download/full/{}",
             "https://osu.direct/api/d/{}",
             "https://catboy.best/d/{}",
         ]

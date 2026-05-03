@@ -1,9 +1,11 @@
 name: "astrbot_plugin_osu_downloader"
 display_name: "osu谱面下载器"
-desc: "自动识别 osu! 谱面链接，从 osu.sayobot , osu.direct 或 catboy.best 镜像站下载 .osz 文件并发送到群聊。"
+desc: "自动识别 osu! 谱面链接，从 osu.direct 或 catboy.best 镜像站下载 .osz 文件并发送到群聊。"
 author: "xianyuOvO"
+contributors:
+  - "ZHAO20060708"
 repo: "https://github.com/xianyuOvO0/astrbot_plugin_osu_downloader"
-version: "1.0.1"
+version: "1.0.2"
 support_platforms:
   - aiocqhttp
 astrbot_version: ">=4.13.0"
