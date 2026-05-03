@@ -1,7 +1,8 @@
 """
 osu谱面下载器
 - 临时文件存放于 /AstrBot/data/plugin_data/astrbot_plugin_osu_downloader/cache/
-- 优先 sayobot，osu.direct，备用 catboy.best
+- 使用 !download <osu谱面链接> 触发下载
+- 优先 osu.direct，备用 catboy.best
 - 增加文件存在性验证
 """
 
@@ -31,7 +32,6 @@ class OsuDownloader(star.Star):
         os.makedirs(self.temp_dir, exist_ok=True)
 
         self.mirrors = [
-            "https://txy1.sayobot.cn/beatmaps/download/full/{}",
             "https://osu.direct/api/d/{}",
             "https://catboy.best/d/{}",
         ]
@@ -99,11 +99,12 @@ class OsuDownloader(star.Star):
                     logger.error(f"下载异常 {download_url}: {e} (尝试 {attempt+1}/{retries+1})")
         return None
 
-    @filter.regex(r"https?://osu\.ppy\.sh/beatmapsets/(\d+)")
+    @filter.command("download")
     async def on_osu_link(self, event: AstrMessageEvent):
-        """识别 osu! 谱面链接并自动下载 .osz 文件"""
+        """接收 !download <osu谱面链接> 并下载 .osz 文件"""
         match = re.search(r"https?://osu\.ppy\.sh/beatmapsets/(\d+)", event.message_str)
         if not match:
+            await event.send(MessageChain([Plain("❌ 请提供有效的 osu! 谱面链接，例如：!download https://osu.ppy.sh/beatmapsets/114514")]))
             return
         set_id = int(match.group(1))
 
