@@ -4,7 +4,7 @@ desc: "自动识别 osu! 谱面链接，从 osu.direct 或 catboy.best 镜像站
 author: "xianyuOvO,ZHAO20060708"
 contributors:
   - "ZHAO20060708"
-repo: "https://github.com/xianyuOvO0/astrbot_plugin_osu_downloader"
+repo: "https://github.com/ZHAO20060708/astrbot_plugin_osu_downloader"
 version: "1.0.3"
 support_platforms:
   - aiocqhttp
