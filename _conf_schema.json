@@ -1,8 +1,14 @@
 {
   "max_size_mb": {
     "type": "int",
-    "label": "最大文件大小 (MB)",
-    "description": "超过此大小的谱面将不下载，防止文件过大发送失败。默认 20 MB。",
+    "description": "允许下载的最大谱面文件大小（MB）",
+    "hint": "设置为 0 表示不限制文件大小。",
     "default": 20
+  },
+  "cleanup_delay_seconds": {
+    "type": "int",
+    "description": "文件发送后延迟清理的秒数",
+    "hint": "至少为 10 秒，避免消息平台尚未读取文件时提前删除。",
+    "default": 120
   }
 }
